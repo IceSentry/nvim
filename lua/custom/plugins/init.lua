@@ -3,8 +3,9 @@
 --
 -- See the kickstart.nvim README for more information
 
+-- TODO move this
 -- Function to open a file with line and column from the terminal output
-function open_file_in_last_pane()
+function OPEN_FILE_IN_LAST_PANE()
   -- Get the current line
   local line = vim.fn.getline '.'
 
@@ -24,6 +25,36 @@ function open_file_in_last_pane()
   print 'No valid file link found in the current line.'
 end
 
-vim.api.nvim_set_keymap('n', '<leader>gf', ':lua open_file_in_last_pane()<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>gf', ':lua OPEN_FILE_IN_LAST_PANE()<CR>', { noremap = true, silent = true })
 
-return {}
+return {
+  'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
+  -- See `:help gitsigns` to understand what the configuration keys do
+  { -- Adds git related signs to the gutter, as well as utilities for managing changes
+    'lewis6991/gitsigns.nvim',
+    opts = {
+      signs = {
+        add = { text = '+' },
+        change = { text = '~' },
+        delete = { text = '_' },
+        topdelete = { text = '‾' },
+        changedelete = { text = '~' },
+      },
+    },
+  },
+  -- Highlight todo, notes, etc in comments
+  { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
+  {
+    'akinsho/toggleterm.nvim',
+    version = '*',
+    opts = {
+      open_mapping = [[<c-\>]],
+      direction = 'float',
+    },
+  },
+  {
+    'folke/trouble.nvim',
+    opts = {}, -- for default options, refer to the configuration section for custom setup.
+    cmd = 'Trouble',
+  },
+}
