@@ -29,21 +29,21 @@ vim.api.nvim_set_keymap('n', '<leader>gf', ':lua OPEN_FILE_IN_LAST_PANE()<CR>', 
 
 return {
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
-  -- See `:help gitsigns` to understand what the configuration keys do
-  { -- Adds git related signs to the gutter, as well as utilities for managing changes
-    'lewis6991/gitsigns.nvim',
+  -- Highlight todo, notes, etc in comments
+  {
+    'folke/todo-comments.nvim',
+    event = 'VimEnter',
+    dependencies = { 'nvim-lua/plenary.nvim' },
     opts = {
-      signs = {
-        add = { text = '+' },
-        change = { text = '~' },
-        delete = { text = '_' },
-        topdelete = { text = '‾' },
-        changedelete = { text = '~' },
+      signs = false,
+      highlight = {
+        pattern = [[.*<(KEYWORDS)\s*]], -- pattern or table of patterns, used for highlighting (vim regex)
+      },
+      search = {
+        pattern = [[\b(KEYWORDS)\b]],
       },
     },
   },
-  -- Highlight todo, notes, etc in comments
-  { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
   {
     'akinsho/toggleterm.nvim',
     version = '*',
