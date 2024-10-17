@@ -1,3 +1,11 @@
+local function is_current_file_in_cwd()
+  -- Get the current file's path
+  local current_file = vim.fn.expand '%:p'
+  local working_directory = vim.fn.getcwd()
+  -- Check if the current file's path starts with the working directory
+  return current_file:sub(1, #working_directory) == working_directory
+end
+
 return {
   {
     -- `lazydev` configures Lua LSP for your Neovim config, runtime and plugins
@@ -39,6 +47,15 @@ return {
       vim.api.nvim_create_autocmd('LspAttach', {
         group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
         callback = function(event)
+          -- if not is_current_file_in_cwd() then
+          --   print('Current file is not in cwd. Detaching LSP with client_id: ' .. event.data.client_id)
+          --   vim.defer_fn(function()
+          --     vim.lsp.stop_client(event.data.client_id)
+          --     -- vim.lsp.buf_detach_client(event.buf, event.data.client_id)
+          --     print('LSP detached for buf: ', event.buf)
+          --   end, 100)
+          -- end
+
           local map = function(keys, func, desc, mode)
             mode = mode or 'n'
             vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
@@ -143,11 +160,16 @@ return {
         -- gopls = {},
         -- pyright = {},
         rust_analyzer = {
-
           settings = {
             ['rust-analyzer'] = {
               cargo = {
                 targetDir = true,
+              },
+              check = {
+                workspace = false,
+              },
+              files = {
+                excludeDirs = { 'C:\\Users\\Charles\\.cargo\\registry' },
               },
             },
           },

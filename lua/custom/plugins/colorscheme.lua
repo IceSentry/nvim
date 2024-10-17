@@ -21,11 +21,12 @@ return {
     on_highlights = function(highlights, colors)
       highlights['@constant'] = { fg = colors.aurora.purple }
       highlights['@module'] = { link = '@type' }
-      highlights['@function'] = { fg = colors.aurora.yellow }
+      highlights['@function'] = { fg = colors.aurora.green }
       highlights['@function.call'] = { link = '@function' }
       highlights['@function.method'] = { link = '@function' }
       highlights['@function.builtin'] = { link = '@function' }
       highlights['@lsp.type.struct.rust'] = { link = '@type' }
+      highlights['@string'] = { fg = colors.aurora.yellow }
     end,
   },
 }

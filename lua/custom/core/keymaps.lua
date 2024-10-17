@@ -62,5 +62,10 @@ vim.keymap.set('n', 'C', '"_C')
 vim.keymap.set('n', 'x', 'd')
 vim.keymap.set('n', 'xx', 'dd')
 vim.keymap.set('n', 'X', 'D')
-
+if vim.g.vscode then
+  vim.keymap.set({ 'n', 'v' }, '<leader>t', function()
+    print 'toggle term'
+    require('vscode').action 'workbench.action.terminal.toggleTerminal'
+  end)
+end
 return {}
