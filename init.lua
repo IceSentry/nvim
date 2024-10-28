@@ -1,5 +1,4 @@
 if vim.g.vscode then
-  print 'Hello vscode'
   -- VSCode extension
   require 'custom.core'
   require 'custom.plugins.mini'
