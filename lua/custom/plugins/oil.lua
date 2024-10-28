@@ -10,7 +10,7 @@ return {
     local detail = false
     require('oil').setup {
       columns = {
-        'icons',
+        'icon',
         -- 'size',
         -- 'mtime'
       },
