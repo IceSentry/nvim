@@ -77,7 +77,7 @@ vim.opt.cursorline = true
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 10
 
-vim.opt.colorcolumn = '80,100'
+vim.opt.colorcolumn = '90,120'
 
 vim.opt.wrap = false
 
@@ -90,3 +90,6 @@ vim.opt.autoindent = true
 -- search settings
 vim.opt.ignorecase = true -- ignore case when searching
 vim.opt.smartcase = true -- if you include mixed case in your search, assumes you want case-sensitive
+
+-- backspace
+vim.opt.backspace = 'indent,eol,start'
