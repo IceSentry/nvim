@@ -80,3 +80,13 @@ vim.opt.scrolloff = 10
 vim.opt.colorcolumn = '80,100'
 
 vim.opt.wrap = false
+
+-- tabs and indentation
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.expandtab = true
+vim.opt.autoindent = true
+
+-- search settings
+vim.opt.ignorecase = true -- ignore case when searching
+vim.opt.smartcase = true -- if you include mixed case in your search, assumes you want case-sensitive
