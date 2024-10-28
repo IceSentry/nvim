@@ -19,6 +19,10 @@ return {
       },
       keymaps = {
         ['<C-s>'] = false,
+        ['<C-h>'] = false,
+        ['<C-j>'] = false,
+        ['<C-k>'] = false,
+        ['<C-l>'] = false,
         ['gd'] = {
           desc = 'Toggle file detail view',
           callback = function()
