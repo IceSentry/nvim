@@ -48,24 +48,24 @@ vim.keymap.set({ 'n', 't' }, '<C-j>', '<CMD>NavigatorDown<CR>')
 vim.keymap.set({ 'n', 't' }, '<C-p>', '<CMD>NavigatorPrevious<CR>')
 
 vim.keymap.set('n', '<C-s>', '<cmd>:w<cr>', { desc = 'Save the file' })
-vim.keymap.set('i', '<C-s>', '<Esc><cmd>:w<cr>', { desc = 'Save the file' })
+vim.keymap.set({ 'i', 'v' }, '<C-s>', '<Esc><cmd>:w<cr>', { desc = 'Save the file' })
 
 -- Make delete actions not yank anything
-vim.keymap.set('n', 'd', '"_d')
-vim.keymap.set('n', 'dd', '"_dd')
-vim.keymap.set('n', 'D', '"_D')
-vim.keymap.set('n', 'x', '"_x')
-vim.keymap.set('n', 'X', '"_X')
-vim.keymap.set('n', 's', '"_s')
-vim.keymap.set('n', 'S', '"_S')
-vim.keymap.set('n', 'c', '"_c')
-vim.keymap.set('n', 'C', '"_C')
-vim.keymap.set('n', 'C', '"_C')
+vim.keymap.set({ 'n', 'v' }, 'd', '"_d')
+vim.keymap.set({ 'n', 'v' }, 'dd', '"_dd')
+vim.keymap.set({ 'n', 'v' }, 'D', '"_D')
+vim.keymap.set({ 'n', 'v' }, 'x', '"_x')
+vim.keymap.set({ 'n', 'v' }, 'X', '"_X')
+vim.keymap.set({ 'n', 'v' }, 's', '"_s')
+vim.keymap.set({ 'n', 'v' }, 'S', '"_S')
+vim.keymap.set({ 'n', 'v' }, 'c', '"_c')
+vim.keymap.set({ 'n', 'v' }, 'C', '"_C')
+vim.keymap.set({ 'n', 'v' }, 'C', '"_C')
 
 -- Use x to cut
-vim.keymap.set('n', 'x', 'd')
-vim.keymap.set('n', 'xx', 'dd')
-vim.keymap.set('n', 'X', 'D')
+vim.keymap.set({ 'n', 'v' }, 'x', 'd')
+vim.keymap.set({ 'n', 'v' }, 'xx', 'dd')
+vim.keymap.set({ 'n', 'v' }, 'X', 'D')
 if vim.g.vscode then
   vim.keymap.set({ 'n', 'v' }, '<leader>t', function()
     print 'toggle term'

@@ -1,7 +1,5 @@
 -- [[ Setting options ]]
 -- See `:help vim.opt`
--- NOTE: You can change these options as you wish!
---  For more options, you can see `:help option-list`
 
 -- Change the default nvim explorer to have indentation
 vim.g.netrw_liststyle = 3
@@ -93,3 +91,8 @@ vim.opt.smartcase = true -- if you include mixed case in your search, assumes yo
 
 -- backspace
 vim.opt.backspace = 'indent,eol,start'
+
+vim.diagnostic.config {
+  underline = true,
+}
+vim.cmd.highlight 'DiagnosticUnderlineError guisp=#ff0000 gui=undercurl'

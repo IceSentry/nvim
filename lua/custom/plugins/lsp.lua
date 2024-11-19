@@ -5,6 +5,7 @@ local function is_current_file_in_cwd()
   -- Check if the current file's path starts with the working directory
   return current_file:sub(1, #working_directory) == working_directory
 end
+local rust_analyzer_check_on_save = true
 
 return {
   {
@@ -39,7 +40,13 @@ return {
     config = function()
       -- If you're wondering about lsp vs treesitter, you can check out the wonderfully
       -- and elegantly composed help section, `:help lsp-vs-treesitter`
-
+      -- vim.api.nvim_create_autocmd('FileType', {
+      --   pattern = 'rs',
+      --   callback = function()
+      --     local root_dir = vim.fs.dirname(vim.fs.find({ 'Cargo.toml' }, { upward = true })[1])
+      --     local client = vim.lsp.start(root_dir = root_dir)
+      --   end,
+      -- })
       --  This function gets run when an LSP attaches to a particular buffer.
       --    That is to say, every time a new file is opened that is associated with
       --    an lsp (for example, opening `main.rs` is associated with `rust_analyzer`) this
@@ -99,6 +106,15 @@ return {
           map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
 
           map('<leader>cd', vim.diagnostic.open_float, 'Show diagnostics')
+
+          local function rust_analyzer_flycheck()
+            local clients = vim.lsp.get_clients { name = 'rust_analyzer' }
+            for _, client in ipairs(clients) do
+              local params = vim.lsp.util.make_text_document_params()
+              client.notify('rust-analyzer/runFlycheck', params)
+            end
+          end
+          map('<leader>ra', rust_analyzer_flycheck, 'Rust Analyzer FlyCheck')
           -- The following two autocommands are used to highlight references of the
           -- word under your cursor when your cursor rests there for a little while.
           --    See `:help CursorHold` for information about when this is executed
@@ -170,10 +186,12 @@ return {
                 workspace = false,
               },
               files = {
-                excludeDirs = { 'C:\\Users\\Charles\\.cargo\\registry' },
+                -- excludeDirs = { 'C:\\Users\\Charles\\.cargo\\registry' },
               },
+              checkOnSave = rust_analyzer_check_on_save,
             },
           },
+          autostart = false,
         },
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --

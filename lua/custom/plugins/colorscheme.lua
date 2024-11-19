@@ -27,6 +27,7 @@ return {
       highlights['@function.builtin'] = { link = '@function' }
       highlights['@lsp.type.struct.rust'] = { link = '@type' }
       highlights['@string'] = { fg = colors.aurora.yellow }
+      -- highlights['DiagnosticUnderlineError'] = { underline = colors.aurora.red }
     end,
   },
 }
